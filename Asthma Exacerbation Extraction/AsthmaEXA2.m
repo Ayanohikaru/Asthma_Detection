@@ -5,7 +5,9 @@
 % WRITTEN BY ENLIN NGO - BME DEPARMENT - INTERNATIONAL UNIVERSITY HO CHI MINH CITY (VNU-HCMIU)
 
 %% READ RECORD
-cd('D:\thesis\MIMIC II DATABASE');
+
+% cd('D:\thesis\MIMIC II DATABASE');
+cd(D_MIMIC_II)
 asth_duration_thresh = 60*2 ;  % (sec) asthma attack duration threshold = 2 min. 
 % Document said few mins to hours or days
 

@@ -1,8 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%Configuring%%%%%%%%%%%%%%
 clc;
 clear all; close all;
-cd('D:\Project\Asthma Detection');
+
 run('Config.m');
+cd(D_Asthma_Detection);
+
 addpath(D_generateData); load('Patient_Record_ICD9.mat');
 cd(D_patientFolder);
 
@@ -12,8 +14,8 @@ PatientList = dir('s*');
 PatientList = {PatientList.name}';
 
 for t = startindex : endindex %length(PatientList)
-    cd(strcat(D_patientFolder,'\',PatientList{t}))
-    D_foldertest = strcat(D_patientFolder,'\',PatientList{t})
+    cd(strcat(D_patientFolder,slash,PatientList{t}))
+    D_foldertest = strcat(D_patientFolder,slash,PatientList{t})
     RecordsListX = dir('s*.hea');
     RecordsListX = {RecordsListX.name}';
     tempRX = cell2mat(cellfun(@(s) strcmp(s(24),'.'),RecordsListX, 'UniformOutput', false));
@@ -40,9 +42,9 @@ close all;
 %patient info
 patientID = fileName(1:6);
 L_alternateDownload = strcat('mimic2wdb/matched/',patientID,'/',recordName);
-D_asthDataP = strcat(D_asthDATA,'\',patientID);
-D_asthDataR = strcat(D_asthDataP,'\',recordName);
-D_recordFolder = strcat(D_patientFolder,'\',patientID);
+D_asthDataP = strcat(D_asthDATA,slash,patientID);
+D_asthDataR = strcat(D_asthDataP,slash,recordName);
+D_recordFolder = strcat(D_patientFolder,slash,patientID);
 mkdir(D_asthDATA,patientID); %create DATA Patient folder 
 mkdir(D_asthDataP,recordName); %create DATA Patient folder 
 patientNo = find(cell2mat(ICD9_description(2:end,2)) == str2double(patientID(2:end))); %No of patient in 182 total
@@ -206,7 +208,7 @@ save(strcat(recordName,'n','.mat'),'n_t0','n_RESP','n_SpO2','n_PULSE','n_PLETH',
 fprintf('N file saved \n');
 end
 %% GENERATE ASTHMA ATTACK TIME
-addpath(D_AsthmaEXA)
+addpath(D_AsthmaEXA);
 run('AsthmaEXA2.m');
 cd(D_asthDataR);
 try load(strcat('AIF_',recordName,'.mat'));
